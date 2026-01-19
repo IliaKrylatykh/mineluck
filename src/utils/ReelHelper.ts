@@ -61,41 +61,44 @@ export function getSymbolFrames(symbol: string): any {
 	var frames = []
 	var sheet
 	switch (symbol) {
-		case 'H1':
-			sheet = Assets.get('fire')
-			frames = sheet.animations.FIRE
-			break
-		case 'H2':
+		case 'W1':
 			sheet = Assets.get('chest')
 			frames = sheet.animations.CHEST
 			break
-		case 'H3':
-			sheet = Assets.get('crys')
-			frames = sheet.animations.CRYS
+
+		case 'B1':
+			sheet = Assets.get('fire')
+			frames = sheet.animations.FIRE
 			break
-		case 'M1':
-			sheet = Assets.get('gem')
-			frames = sheet.animations.GEM
+
+		case 'L1':
+			sheet = Assets.get('merc')
+			frames = sheet.animations.MERC
 			break
-		case 'M2':
-			sheet = Assets.get('gold')
-			frames = sheet.animations.GOLD
-			break
-		case 'M3':
+		case 'L2':
 			sheet = Assets.get('ore')
 			frames = sheet.animations.ORE
 			break
-		case 'L1':
-			sheet = Assets.get('wood')
-			frames = sheet.animations.WOOD
-			break
-		case 'L2':
+		case 'L3':
 			sheet = Assets.get('sulf')
 			frames = sheet.animations.SULF
 			break
-		case 'L3':
-			sheet = Assets.get('merc')
-			frames = sheet.animations.MERC
+		case 'L4':
+			sheet = Assets.get('wood')
+			frames = sheet.animations.WOOD
+			break
+
+		case 'H1':
+			sheet = Assets.get('crys')
+			frames = sheet.animations.CRYS
+			break
+		case 'H2':
+			sheet = Assets.get('gem')
+			frames = sheet.animations.GEM
+			break
+		case 'H3':
+			sheet = Assets.get('gold')
+			frames = sheet.animations.GOLD
 			break
 	}
 	return frames

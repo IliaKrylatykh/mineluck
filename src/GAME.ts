@@ -31,7 +31,7 @@ type GameConfig = {
 }
 
 export const gameConfig: GameConfig = {
-	gameWidth: 320,
+	gameWidth: 360,
 	gameHeight: 500,
 
 	reelSpinSpeed: 19,
@@ -42,7 +42,7 @@ export const gameConfig: GameConfig = {
 
 	useForcedResult: false,
 	useForcedResultIndex: undefined,
-	probabilityFRChosen: 9,
+	probabilityFRChosen: 1,
 
 	// dev
 	showBlockConsole: true,

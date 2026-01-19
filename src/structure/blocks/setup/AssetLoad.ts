@@ -34,16 +34,18 @@ export class AssetLoad extends Block {
 			game_logo: '/assets/images/game_logo.png',
 			game_frame: '/assets/images/game_frame.png',
 
-			fire: '/assets/spritesheets/low-symbols/fire.json',
-			chest: '/assets/spritesheets/high-symbols/chest.json',
-			crys: '/assets/spritesheets/mid-symbols/crys.json',
-			gem: '/assets/spritesheets/high-symbols/gem.json',
-			gold: '/assets/spritesheets/mid-symbols/gold.json',
+			chest: '/assets/spritesheets/wild-symbols/chest.json', // wold
 
-			sulf: '/assets/spritesheets/low-symbols/sulf.json',
-			ore: '/assets/spritesheets/low-symbols/ore.json',
-			wood: '/assets/spritesheets/low-symbols/wood.json',
-			merc: '/assets/spritesheets/low-symbols/merc.json',
+			fire: '/assets/spritesheets/bonus-symbols/fire.json', // bonus
+
+			crys: '/assets/spritesheets/high-symbols/crys.json', // high
+			gem: '/assets/spritesheets/high-symbols/gem.json', // high
+			gold: '/assets/spritesheets/high-symbols/gold.json', // high
+
+			sulf: '/assets/spritesheets/low-symbols/sulf.json', // low
+			ore: '/assets/spritesheets/low-symbols/ore.json', // low
+			wood: '/assets/spritesheets/low-symbols/wood.json', // low
+			merc: '/assets/spritesheets/low-symbols/merc.json', // low
 		})
 
 		const assets = await Assets.loadBundle('all', (progress: number) => {
@@ -65,7 +67,7 @@ export class AssetLoad extends Block {
 
 		this.progressBar = new TGraphics(progress_bar)
 		const randomQuoteSelected = Math.floor(
-			Math.random() * this.randomQuotes.length
+			Math.random() * this.randomQuotes.length,
 		)
 
 		const progressText = new Text({
@@ -77,7 +79,7 @@ export class AssetLoad extends Block {
 		progressText.anchor.set(progress_text.anchor)
 		progressText.position.set(
 			progress_text.position.x,
-			progress_text.position.y
+			progress_text.position.y,
 		)
 
 		GAME.containers.progressContainer.addChild(progressText)

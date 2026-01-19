@@ -2,14 +2,13 @@ export class ResultModel {
 	isWin: boolean = false
 
 	spinResult: string[][] = [
-		['H1', 'H2', 'H3', 'H1', 'H2'],
-		['M1', 'M2', 'M3', 'M1', 'M2'],
+		['H1', 'H2', 'H3', 'L4', 'H2'],
+		['L4', 'L3', 'B1', 'H2', 'W1'],
 		['L1', 'L2', 'L3', 'L1', 'L2'],
 	]
 
 	linesToAnimate: Array<{ reelIndex: number; symbolIndex: number }> = []
 
-	// Define win lines for 5x3 format
 	winLines: { [key: string]: string[][] } = {
 		'1': [
 			['X', 'X', 'X', 'X', 'X'],
@@ -55,12 +54,32 @@ export class ResultModel {
 			['X', '0', '0', '0', '0'],
 			['0', 'X', '0', '0', '0'],
 			['0', '0', 'X', '0', '0'],
-		], // Diagonal top-left to bottom-right
+		], // Diagonal top-left to bottom-center
 		'10': [
 			['0', '0', '0', '0', 'X'],
 			['0', '0', '0', 'X', '0'],
 			['0', '0', 'X', '0', '0'],
-		], // Diagonal top-right to bottom-left
+		], // Diagonal top-right to bottom-center
+		'11': [
+			['0', '0', 'X', '0', '0'],
+			['0', 'X', '0', '0', '0'],
+			['X', '0', '0', '0', '0'],
+		], // Diagonal bottom-left to top-center
+		'12': [
+			['0', '0', 'X', '0', '0'],
+			['0', '0', '0', 'X', '0'],
+			['0', '0', '0', '0', 'X'],
+		], // Diagonal bottom-right to top-center
+		'13': [
+			['0', '0', 'X', '0', '0'],
+			['0', 'X', '0', 'X', '0'],
+			['X', '0', '0', '0', 'X'],
+		], // Bottom-left to top-center to bottom-right
+		'14': [
+			['X', '0', '0', '0', 'X'],
+			['0', 'X', '0', 'X', '0'],
+			['0', '0', 'X', '0', '0'],
+		], // Top-left to bottom-center to top-right
 	}
 
 	// Store the last win amount

@@ -127,7 +127,8 @@ export class PIXI_CONFIG {
 			master_reel_container: {
 				label: 'master-reel-container',
 				x: () => window.innerWidth / 2 - gameConfig.gameWidth / 2,
-				y: () => window.innerHeight / 2 - ((gameConfig.gameWidth / 5) * 3) / 2 + 40,
+				y: () =>
+					window.innerHeight / 2 - ((gameConfig.gameWidth / 5) * 3) / 2 + 40,
 			},
 			master_reel_container_mask: {
 				label: 'master-reel-container-mask',
@@ -190,7 +191,8 @@ export class PIXI_CONFIG {
 			win_text_container: {
 				label: 'win-text-container',
 				x: () => window.innerWidth / 2 - gameConfig.gameWidth / 2,
-				y: () => window.innerHeight / 2 - ((gameConfig.gameWidth / 5) * 3) / 2 + 40,
+				y: () =>
+					window.innerHeight / 2 - ((gameConfig.gameWidth / 5) * 3) / 2 + 40,
 			},
 			decorative_animation: {
 				label: 'decorative-animation',
