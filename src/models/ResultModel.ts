@@ -9,6 +9,8 @@ export class ResultModel {
 
 	linesToAnimate: Array<{ reelIndex: number; symbolIndex: number }> = []
 
+	activeWinLines: string[] = []
+
 	winLines: { [key: string]: string[][] } = {
 		'1': [
 			['X', 'X', 'X', 'X', 'X'],

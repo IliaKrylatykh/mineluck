@@ -6,6 +6,7 @@ import { Ticker } from 'pixi.js'
 import { CleanUpGame } from '../blocks/game-over/CleanUpGame'
 import { SetSymbolsToReel } from '../blocks/game-ready/SetSymbolsToReel'
 import { AnimateWinlines } from '../blocks/game-over/AnimateWinLines'
+import { DrawWinLines } from '../blocks/game-over/DrawWinLines'
 import { WinAmountModal } from '../blocks/game-over/WinAmountModal'
 import GameUI from '../../ui/GameUI'
 import { winMultipliers } from '../../models/ReelModel'
@@ -35,6 +36,7 @@ export class GameOverState extends State {
 			new CleanUpGame('Clean up reel overflow'),
 			new SetSymbolsToReel('Set symbols to reel'),
 			new AnimateWinlines('Animate Winlines'),
+			new DrawWinLines('Draw Win Lines'),
 			new WinAmountModal('Win amount modal'),
 		]
 	}
@@ -128,12 +130,14 @@ export class GameOverState extends State {
 		if (!spinResult || spinResult.length < 3) return
 
 		result.linesToAnimate = []
+		result.activeWinLines = []
 		this._landedWinLines = []
 
 		Object.entries(result.winLines).forEach(([winLineKey, winLinePattern]) => {
 			if (this._checkWinLinePattern(spinResult, winLinePattern)) {
 				result.isWin = true
 				this._landedWinLines.push(winLineKey)
+				result.activeWinLines.push(winLineKey)
 
 				const positions = this._getPositionsForWinLine(winLineKey)
 				result.linesToAnimate.push(...positions)

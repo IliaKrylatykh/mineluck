@@ -1,6 +1,6 @@
 import { Block } from '../../Block'
 import { GAME } from '../../../GAME'
-import { Text, Ticker } from 'pixi.js'
+import { Text, Ticker, Graphics } from 'pixi.js'
 import { TGraphics } from '../../../pixi/TGraphics'
 
 export class WinAmountModal extends Block {
@@ -12,11 +12,9 @@ export class WinAmountModal extends Block {
 
 	start() {
 		const { isWin, lastWinAmount } = this.models.result
-		// either draw the bank panel on a win...
 		if (isWin && lastWinAmount > 0) {
 			this._drawBankPanel()
 		} else {
-			//... or just continue
 			GAME.events.gameInfo.dispatch()
 			this.end()
 		}
@@ -49,16 +47,18 @@ export class WinAmountModal extends Block {
 			window.addEventListener('click', handleClick)
 		}
 
-		// Add click event handler
 		const handleClick = () => {
 			GAME.sound?.stop('coin-count-loop')
 			GAME.sound?.play('coin-flung')
 			countUpTicker.stop()
 			countUpTicker.destroy()
 			GAME.containers.winPanelContainer.children.forEach(child =>
-				child.destroy()
+				child.destroy(),
 			)
 			GAME.containers.winPanelContainer.removeChildren()
+
+			this._clearDarkenOverlays()
+
 			window.removeEventListener('click', handleClick)
 			GAME.events.gameInfo.dispatch()
 			this.end()
@@ -66,16 +66,13 @@ export class WinAmountModal extends Block {
 
 		window.addEventListener('click', skipAnimation)
 
-		// Add both the background panel and the text
 		GAME.containers.winPanelContainer.addChild(bankPanel.graphics)
 		GAME.containers.winPanelContainer.addChild(basicText)
 
-		// Position the text in the center of the panel
 		basicText.position.y = bankPanel.graphics.height / 2
 		basicText.position.x = bankPanel.graphics.width / 2
 		basicText.anchor.set(0.5)
 
-		// Scale Animation configuration
 		const minScale = 2.5 // smallest we want the scale
 		const maxScale = 3.2 // largest we want it
 		const frequencyChange = 0.05 // How fast the animation progresses
@@ -106,5 +103,24 @@ export class WinAmountModal extends Block {
 		})
 
 		countUpTicker.start()
+	}
+
+	private _clearDarkenOverlays(): void {
+		if (!GAME.containers.mainGameContainer) return
+
+		const childrenToRemove: Graphics[] = []
+		GAME.containers.mainGameContainer.children.forEach(child => {
+			if (
+				child instanceof Graphics &&
+				child.label?.includes('win-darken-overlay')
+			) {
+				childrenToRemove.push(child)
+			}
+		})
+
+		childrenToRemove.forEach(graphics => {
+			GAME.containers.mainGameContainer.removeChild(graphics)
+			graphics.destroy()
+		})
 	}
 }
