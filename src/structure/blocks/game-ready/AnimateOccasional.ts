@@ -23,23 +23,21 @@ export class AnimateOccasional extends Block {
 			GAME.containers.reelBContainer,
 			GAME.containers.reelCContainer,
 			GAME.containers.reelDContainer,
+			GAME.containers.reelEContainer,
 		]
 
-		// Randomly select one of the 4 reel containers
-		const randomContainerIndex = Math.floor(Math.random() * 4)
+		const randomContainerIndex = Math.floor(Math.random() * 5)
 		const selectedContainer = reelContainers[randomContainerIndex]
 
 		if (selectedContainer.children.length === 0) {
 			return
 		}
 
-		// Randomly select a child from the container
 		const randomChildIndex = Math.floor(
-			Math.random() * selectedContainer.children.length
+			Math.random() * selectedContainer.children.length,
 		)
 		const selectedChild = selectedContainer.children[randomChildIndex] as any
 
-		// Check if the child is an animated sprite and animate it
 		if (selectedChild && typeof selectedChild.gotoAndPlay === 'function') {
 			selectedChild.gotoAndPlay(0)
 		}

@@ -35,6 +35,9 @@ export class DrawReelContainers extends Block {
 		const { reel_D_container } = GAME.config.getConfig()
 		GAME.containers.reelDContainer = new XContainer(reel_D_container)
 
+		const { reel_E_container } = GAME.config.getConfig()
+		GAME.containers.reelEContainer = new XContainer(reel_E_container)
+
 		const { master_reel_container_mask } = GAME.config.getConfig()
 		const masterReelContainerMask = new TGraphics(master_reel_container_mask)
 
@@ -46,5 +49,6 @@ export class DrawReelContainers extends Block {
 		masterReelContainer.addChild(GAME.containers.reelBContainer)
 		masterReelContainer.addChild(GAME.containers.reelCContainer)
 		masterReelContainer.addChild(GAME.containers.reelDContainer)
+		masterReelContainer.addChild(GAME.containers.reelEContainer)
 	}
 }

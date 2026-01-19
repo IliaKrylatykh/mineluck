@@ -17,5 +17,6 @@ export class SetSymbolsToReel extends Block {
 		setupReel(1, GAME.containers.reelBContainer, this.models)
 		setupReel(2, GAME.containers.reelCContainer, this.models)
 		setupReel(3, GAME.containers.reelDContainer, this.models)
+		setupReel(4, GAME.containers.reelEContainer, this.models)
 	}
 }

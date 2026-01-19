@@ -54,8 +54,6 @@ export class GameOverState extends State {
 		GAME.states[GameState.GAME_READY].enterState()
 	}
 
-	// -------------------------------------------------------------------------//
-
 	private _resetWin(): void {
 		this.models.result.isWin = false
 	}
@@ -75,7 +73,6 @@ export class GameOverState extends State {
 	private _deductNextBet(): void {
 		const { bet } = this.models
 
-		// Store the original bet amount before any adjustments
 		this._currentBet = bet.betAmount
 
 		if (bet.bankBalance < this._currentBet) {
@@ -86,7 +83,6 @@ export class GameOverState extends State {
 			}
 		}
 
-		// Deduct the bet amount
 		if (bet.bankBalance >= bet.betAmount) {
 			bet.bankBalance -= bet.betAmount
 		}
@@ -112,10 +108,9 @@ export class GameOverState extends State {
 				if (symbol && winMultipliers[symbol as keyof typeof winMultipliers]) {
 					const multiplier =
 						winMultipliers[symbol as keyof typeof winMultipliers]
-					// Use this._currentBet for win calculations to handle insufficient funds case
 					const winForLine = this._currentBet * multiplier
 					console.log(
-						`💵 Win line ${winLineKey}: Symbol ${symbol}, Multiplier ${multiplier}, Win ${winForLine}`
+						`💵 Win line ${winLineKey}: Symbol ${symbol}, Multiplier ${multiplier}, Win ${winForLine}`,
 					)
 					totalWin += winForLine
 				}
@@ -130,19 +125,16 @@ export class GameOverState extends State {
 		const { result } = this.models
 		const { spinResult } = result
 
-		if (!spinResult || spinResult.length < 4) return
+		if (!spinResult || spinResult.length < 3) return
 
-		// Reset lines to animate and landed win lines
 		result.linesToAnimate = []
 		this._landedWinLines = []
 
-		// Check each predefined win line
 		Object.entries(result.winLines).forEach(([winLineKey, winLinePattern]) => {
 			if (this._checkWinLinePattern(spinResult, winLinePattern)) {
 				result.isWin = true
 				this._landedWinLines.push(winLineKey)
 
-				// Add positions to animate based on win line type
 				const positions = this._getPositionsForWinLine(winLineKey)
 				result.linesToAnimate.push(...positions)
 			}
@@ -151,9 +143,8 @@ export class GameOverState extends State {
 
 	private _checkWinLinePattern(
 		spinResult: string[][],
-		pattern: string[][]
+		pattern: string[][],
 	): boolean {
-		// Get all X positions from the pattern
 		const xPositions: Array<{ row: number; col: number }> = []
 
 		for (let row = 0; row < pattern.length; row++) {
@@ -164,7 +155,6 @@ export class GameOverState extends State {
 			}
 		}
 
-		// Check if all X positions have the same symbol
 		if (xPositions.length === 0) return false
 
 		const firstSymbol = spinResult[xPositions[0].row][xPositions[0].col]
@@ -173,12 +163,11 @@ export class GameOverState extends State {
 	}
 
 	private _getPositionsForWinLine(
-		winLineKey: string
+		winLineKey: string,
 	): Array<{ reelIndex: number; symbolIndex: number }> {
 		const positions: Array<{ reelIndex: number; symbolIndex: number }> = []
 		const pattern = this.models.result.winLines[winLineKey]
 
-		// Find all X positions and convert to reel/symbol positions
 		for (let row = 0; row < pattern.length; row++) {
 			for (let col = 0; col < pattern[row].length; col++) {
 				if (pattern[row][col] === 'X') {

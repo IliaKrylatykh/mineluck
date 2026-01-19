@@ -6,7 +6,7 @@ import { XContainer } from '../../../pixi/XContainer'
 export class AnimateReels extends Block {
 	private reelTickers: Ticker[] = []
 	private completedReels: number = 0
-	private totalReels: number = 4
+	private totalReels: number = 5
 
 	constructor(name: string) {
 		super(name)
@@ -14,14 +14,17 @@ export class AnimateReels extends Block {
 
 	start() {
 		this._setupReelAnimationSpeeds()
-		// end in last animation complete
 	}
 
 	private _setupReelAnimationSpeeds(): void {
-		const { reelAContainer, reelBContainer, reelCContainer, reelDContainer } =
-			GAME.containers
+		const {
+			reelAContainer,
+			reelBContainer,
+			reelCContainer,
+			reelDContainer,
+			reelEContainer,
+		} = GAME.containers
 
-		// Configuration for reel timing and speeds (randomized)
 		const reelConfig = [
 			{ container: reelAContainer, delay: 0, speed: 0.8 + Math.random() * 0.6 },
 			{
@@ -39,9 +42,13 @@ export class AnimateReels extends Block {
 				delay: 300 + Math.random() * 500,
 				speed: 0.8 + Math.random() * 0.6,
 			},
+			{
+				container: reelEContainer,
+				delay: 400 + Math.random() * 600,
+				speed: 0.8 + Math.random() * 0.6,
+			},
 		]
 
-		// Start each reel with its configuration
 		reelConfig.forEach(config => {
 			setTimeout(() => {
 				this._startAnimation(config.container, config.speed)
@@ -51,16 +58,16 @@ export class AnimateReels extends Block {
 
 	private _startAnimation(
 		individualReelContainer: XContainer,
-		speedMultiplier: number = 1.0
+		speedMultiplier: number = 1.0,
 	): void {
 		const endPos =
 			individualReelContainer.y +
 			individualReelContainer.height -
-			gameConfig.gameWidth
+			(gameConfig.gameWidth / 5) * 3
 		const ticker = new Ticker()
 		this.reelTickers.push(ticker)
 		ticker.add(() =>
-			this._moveReel(endPos, individualReelContainer, ticker, speedMultiplier)
+			this._moveReel(endPos, individualReelContainer, ticker, speedMultiplier),
 		)
 
 		ticker.start()
@@ -70,7 +77,7 @@ export class AnimateReels extends Block {
 		stopPos: number,
 		reelToMove: XContainer,
 		ticker: Ticker,
-		speedMultiplier: number = 1.0
+		speedMultiplier: number = 1.0,
 	): void {
 		if (reelToMove.position.y < stopPos) {
 			reelToMove.position.y +=
@@ -84,7 +91,6 @@ export class AnimateReels extends Block {
 			ticker.stop()
 			ticker.destroy()
 
-			// Track completion and end when all reels are done
 			this.completedReels++
 
 			if (this.completedReels >= this.totalReels) {

@@ -58,8 +58,8 @@ export class SpinResultState extends State {
 
 	private _generateRandomDisplayRow(): string[] {
 		const symbols = Object.values(SYMBOLS)
-		var row = []
-		for (var x = 0; x < 4; x++) {
+		const row = []
+		for (let x = 0; x < 5; x++) {
 			row.push(symbols[Math.floor(Math.random() * symbols.length)])
 		}
 		return row
@@ -67,14 +67,12 @@ export class SpinResultState extends State {
 
 	private _generateRandomSpinResult(): void {
 		const { reel, result } = this.models
-		// Add 12 random filler rows
-		for (var y = 0; y < 12; y++) {
+		for (let y = 0; y < 12; y++) {
 			const randomRow = this._generateRandomDisplayRow()
 			reel.reelDisplay.unshift(randomRow)
 		}
 
-		// Add 4 random result rows
-		for (var y = 0; y < 4; y++) {
+		for (let y = 0; y < 3; y++) {
 			const randomRow = this._generateRandomDisplayRow()
 			reel.reelDisplay.unshift(randomRow)
 			result.spinResult.unshift(randomRow)
@@ -85,18 +83,15 @@ export class SpinResultState extends State {
 		const { reel, result } = this.models
 
 		const randomForcedResult = getRandomForcedResult()
-		//const randomForcedResult = FORCED_RESULTS[1].result;
 
-		for (var y = 0; y < 12; y++) {
+		for (let y = 0; y < 12; y++) {
 			const randomRow = this._generateRandomDisplayRow()
 			reel.reelDisplay.unshift(randomRow)
 		}
 
-		// Add forced result at end (create deep copy to avoid mutating original)
 		const resultCopy = randomForcedResult.result.map((row: string[]) => [
 			...row,
 		])
-		// Add copy of forced result to reel display
 		reel.reelDisplay.unshift(...resultCopy)
 		result.spinResult = resultCopy
 	}

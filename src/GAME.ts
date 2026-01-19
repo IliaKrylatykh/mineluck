@@ -79,6 +79,7 @@ type GAME_Type = {
 		reelBContainer: XContainer | undefined
 		reelCContainer: XContainer | undefined
 		reelDContainer: XContainer | undefined
+		reelEContainer: XContainer | undefined
 		winPanelContainer: XContainer | undefined
 	}
 	sound: typeof sound | undefined
@@ -97,7 +98,7 @@ export const GAME: GAME_Type = {
 		[GameState.GAME_OVER]: new GameOverState(),
 	},
 	events: {
-		audioToggle: new CustomEvent<void>('audio-toggle', true), // audio and visuals
+		audioToggle: new CustomEvent<void>('audio-toggle', true),
 		volumeUp: new CustomEvent<void>('volume-up'),
 		volumeDown: new CustomEvent<void>('volume-down'),
 		blockComplete: new CustomEvent<void>('block-complete'),
@@ -117,6 +118,7 @@ export const GAME: GAME_Type = {
 		reelBContainer: undefined,
 		reelCContainer: undefined,
 		reelDContainer: undefined,
+		reelEContainer: undefined,
 		winPanelContainer: undefined,
 	},
 	sound: undefined,
@@ -124,5 +126,4 @@ export const GAME: GAME_Type = {
 	config: new PIXI_CONFIG(),
 }
 
-// Enter the setup state
 GAME.states[GameState.SETUP].enterState()

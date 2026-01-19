@@ -8,7 +8,6 @@ export class AnimateWinlines extends Block {
 
 	start() {
 		this._animateWinLines()
-		// End the block after animating
 	}
 
 	private _animateWinLines(): void {
@@ -19,15 +18,14 @@ export class AnimateWinlines extends Block {
 			GAME.containers.reelBContainer,
 			GAME.containers.reelCContainer,
 			GAME.containers.reelDContainer,
+			GAME.containers.reelEContainer,
 		]
 
-		// Check if we have winning lines to animate
 		if (!linesToAnimate || linesToAnimate.length === 0) {
 			this.end()
 			return
 		}
 
-		// Animate each winning symbol position
 		linesToAnimate.forEach(({ reelIndex, symbolIndex }) => {
 			const container = reelContainers[reelIndex]
 
@@ -40,7 +38,6 @@ export class AnimateWinlines extends Block {
 			}
 		})
 
-		// End the block after animating
 		this.end()
 	}
 }

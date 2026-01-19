@@ -12,16 +12,20 @@ export class PositionStartOfSpin extends Block {
 	}
 
 	private _secretlyMoveReels(): void {
+		const reelHeight = (gameConfig.gameWidth / 5) * 3
 		GAME.containers.reelAContainer.y = -GAME.containers.reelAContainer.height
-		GAME.containers.reelAContainer.y += gameConfig.gameWidth
+		GAME.containers.reelAContainer.y += reelHeight
 
 		GAME.containers.reelBContainer.y = -GAME.containers.reelBContainer.height
-		GAME.containers.reelBContainer.y += gameConfig.gameWidth
+		GAME.containers.reelBContainer.y += reelHeight
 
 		GAME.containers.reelCContainer.y = -GAME.containers.reelCContainer.height
-		GAME.containers.reelCContainer.y += gameConfig.gameWidth
+		GAME.containers.reelCContainer.y += reelHeight
 
 		GAME.containers.reelDContainer.y = -GAME.containers.reelDContainer.height
-		GAME.containers.reelDContainer.y += gameConfig.gameWidth
+		GAME.containers.reelDContainer.y += reelHeight
+
+		GAME.containers.reelEContainer.y = -GAME.containers.reelEContainer.height
+		GAME.containers.reelEContainer.y += reelHeight
 	}
 }
