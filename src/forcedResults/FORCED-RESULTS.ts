@@ -1450,4 +1450,164 @@ export const FORCED_RESULTS: { [key: number]: ForcedResult } = deepFreeze({
 		isWin: false,
 		winLines: 0,
 	},
+	210: {
+		label: 'all-W1',
+		result: [
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+		],
+		isWin: true,
+		winLines: 14,
+	},
+	211: {
+		label: 'line1-W1',
+		result: [
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+			['L1', 'L2', 'H1', 'H2', 'L3'],
+			['H1', 'H2', 'H3', 'L1', 'L2'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	212: {
+		label: 'line2-W1',
+		result: [
+			['L1', 'L2', 'H1', 'H2', 'L3'],
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+			['H1', 'H2', 'H3', 'L1', 'L2'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	213: {
+		label: 'line3-W1',
+		result: [
+			['L1', 'L2', 'H1', 'H2', 'L3'],
+			['H1', 'H2', 'H3', 'L1', 'L2'],
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	214: {
+		label: 'line4-W1',
+		result: [
+			['W1', 'L1', 'L2', 'H1', 'H2'],
+			['W1', 'H1', 'H2', 'H3', 'L1'],
+			['W1', 'H2', 'H3', 'L1', 'L2'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	215: {
+		label: 'line5-W1',
+		result: [
+			['L1', 'W1', 'L2', 'H1', 'H2'],
+			['H1', 'W1', 'H2', 'H3', 'L1'],
+			['H2', 'W1', 'H3', 'L1', 'L2'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	216: {
+		label: 'line6-W1',
+		result: [
+			['L1', 'L2', 'W1', 'H1', 'H2'],
+			['H1', 'H2', 'W1', 'H3', 'L1'],
+			['H2', 'H3', 'W1', 'L1', 'L2'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	217: {
+		label: 'line7-W1',
+		result: [
+			['L1', 'L2', 'H1', 'W1', 'H2'],
+			['H1', 'H2', 'H3', 'W1', 'L1'],
+			['H2', 'H3', 'L1', 'W1', 'L2'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	218: {
+		label: 'line8-W1',
+		result: [
+			['L1', 'L2', 'H1', 'H2', 'W1'],
+			['H1', 'H2', 'H3', 'L1', 'W1'],
+			['H2', 'H3', 'L1', 'L2', 'W1'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	219: {
+		label: 'line9-W1',
+		result: [
+			['W1', 'L1', 'L2', 'H1', 'H2'],
+			['H1', 'W1', 'H2', 'H3', 'L1'],
+			['H2', 'H3', 'W1', 'L1', 'L2'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	220: {
+		label: 'line10-W1',
+		result: [
+			['L1', 'L2', 'H1', 'H2', 'W1'],
+			['H1', 'H2', 'H3', 'W1', 'L1'],
+			['H2', 'H3', 'W1', 'L1', 'L2'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	221: {
+		label: 'line11-W1',
+		result: [
+			['H2', 'H3', 'W1', 'L1', 'L2'],
+			['H1', 'W1', 'H2', 'H3', 'L1'],
+			['W1', 'L1', 'L2', 'H1', 'H2'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	222: {
+		label: 'line12-W1',
+		result: [
+			['H2', 'H3', 'W1', 'L1', 'L2'],
+			['H1', 'H2', 'H3', 'W1', 'L1'],
+			['W1', 'L1', 'L2', 'H1', 'H2'],
+		],
+		isWin: true,
+		winLines: 1,
+	},
+	223: {
+		label: 'lines-1-2-W1',
+		result: [
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+			['H1', 'H2', 'H3', 'L1', 'L2'],
+		],
+		isWin: true,
+		winLines: 2,
+	},
+	224: {
+		label: 'lines-1-3-W1',
+		result: [
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+			['H1', 'H2', 'H3', 'L1', 'L2'],
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+		],
+		isWin: true,
+		winLines: 2,
+	},
+	225: {
+		label: 'lines-2-3-W1',
+		result: [
+			['H1', 'H2', 'H3', 'L1', 'L2'],
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+			['W1', 'W1', 'W1', 'W1', 'W1'],
+		],
+		isWin: true,
+		winLines: 2,
+	},
 })

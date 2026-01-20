@@ -34,7 +34,7 @@ export const gameConfig: GameConfig = {
 	gameWidth: 360,
 	gameHeight: 500,
 
-	reelSpinSpeed: 19,
+	reelSpinSpeed: 191,
 
 	defaultBet: 5,
 	betChangeAmount: 5,

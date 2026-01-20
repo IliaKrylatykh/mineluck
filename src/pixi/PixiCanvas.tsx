@@ -32,15 +32,15 @@ const PixiCanvas = () => {
 		document.addEventListener('keyup', function (event) {
 			const { isPaused } = GAME_MODELS.progress
 
-			// if (event.code === 'Space' && !isPaused) {
-			// 	GAME.events.spinButton.dispatch()
-			// }
-			// if (event.code === 'ArrowUp' && !isPaused) {
-			// 	GAME.events.changeBet.dispatch(1)
-			// }
-			// if (event.code === 'ArrowDown' && !isPaused) {
-			// 	GAME.events.changeBet.dispatch(-1)
-			// }
+			if (event.code === 'Space' && !isPaused) {
+				GAME.events.spinButton.dispatch()
+			}
+			if (event.code === 'ArrowUp' && !isPaused) {
+				GAME.events.changeBet.dispatch(1)
+			}
+			if (event.code === 'ArrowDown' && !isPaused) {
+				GAME.events.changeBet.dispatch(-1)
+			}
 		})
 	}, [])
 

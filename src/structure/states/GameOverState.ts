@@ -107,7 +107,15 @@ export class GameOverState extends State {
 					}
 					if (symbol) break
 				}
-				if (symbol && winMultipliers[symbol as keyof typeof winMultipliers]) {
+				
+				if (symbol === 'W1') {
+					const multiplier = winMultipliers.H1
+					const winForLine = this._currentBet * multiplier
+					console.log(
+						`💵 Win line ${winLineKey}: Symbol ${symbol} (3 wild = high symbol), Multiplier ${multiplier}, Win ${winForLine}`,
+					)
+					totalWin += winForLine
+				} else if (symbol && winMultipliers[symbol as keyof typeof winMultipliers]) {
 					const multiplier =
 						winMultipliers[symbol as keyof typeof winMultipliers]
 					const winForLine = this._currentBet * multiplier
