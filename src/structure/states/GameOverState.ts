@@ -16,6 +16,7 @@ export class GameOverState extends State {
 	private _currentBet: number = 0
 	private _insufficientFunds: boolean
 	private _landedWinLines: string[] = []
+	private _bonusCounter: number = 0
 
 	setupEvents(): void {
 		console.log('💀------GameOverState------💀')
@@ -108,7 +109,14 @@ export class GameOverState extends State {
 					if (symbol) break
 				}
 				
-				if (symbol === 'W1') {
+				if (symbol === 'B1') {
+					const multiplier = winMultipliers.H1
+					const winForLine = this._currentBet * multiplier
+					console.log(
+						`💵 Win line ${winLineKey}: Symbol ${symbol} (B1 = high symbol), Multiplier ${multiplier}, Win ${winForLine}`,
+					)
+					totalWin += winForLine
+				} else if (symbol === 'W1') {
 					const multiplier = winMultipliers.H1
 					const winForLine = this._currentBet * multiplier
 					console.log(
@@ -140,23 +148,39 @@ export class GameOverState extends State {
 		result.linesToAnimate = []
 		result.activeWinLines = []
 		this._landedWinLines = []
+		this._bonusCounter = 0
 
 		Object.entries(result.winLines).forEach(([winLineKey, winLinePattern]) => {
-			if (this._checkWinLinePattern(spinResult, winLinePattern)) {
+			const checkResult = this._checkWinLinePattern(spinResult, winLinePattern)
+			if (checkResult.isWin) {
 				result.isWin = true
 				this._landedWinLines.push(winLineKey)
 				result.activeWinLines.push(winLineKey)
 
 				const positions = this._getPositionsForWinLine(winLineKey)
 				result.linesToAnimate.push(...positions)
+
+				const b1Count = checkResult.b1Count
+				if (b1Count > 0) {
+					this._bonusCounter += b1Count
+					console.log(`🔥 Бонус счетчик: +${b1Count} (линия ${winLineKey}), всего: ${this._bonusCounter}`)
+				}
+
+				if (checkResult.isOnlyB1) {
+					console.log(`⭐ Bonus ${winLineKey} `)
+				}
 			}
 		})
+
+		if (this._bonusCounter > 0) {
+			console.log(`🎁 Bonus counter: ${this._bonusCounter}`)
+		}
 	}
 
 	private _checkWinLinePattern(
 		spinResult: string[][],
 		pattern: string[][],
-	): boolean {
+	): { isWin: boolean; b1Count: number; isOnlyB1: boolean } {
 		const xPositions: Array<{ row: number; col: number }> = []
 
 		for (let row = 0; row < pattern.length; row++) {
@@ -167,11 +191,23 @@ export class GameOverState extends State {
 			}
 		}
 
-		if (xPositions.length === 0) return false
+		if (xPositions.length === 0) {
+			return { isWin: false, b1Count: 0, isOnlyB1: false }
+		}
 
-		const firstSymbol = spinResult[xPositions[0].row][xPositions[0].col]
+		const symbols = xPositions.map(pos => spinResult[pos.row][pos.col])
+		const firstSymbol = symbols[0]
+		const allSame = symbols.every(symbol => symbol === firstSymbol)
 
-		return xPositions.every(pos => spinResult[pos.row][pos.col] === firstSymbol)
+		// Подсчет B1 в комбинации
+		const b1Count = symbols.filter(symbol => symbol === 'B1').length
+		const isOnlyB1 = allSame && firstSymbol === 'B1'
+
+		return {
+			isWin: allSame,
+			b1Count,
+			isOnlyB1,
+		}
 	}
 
 	private _getPositionsForWinLine(
