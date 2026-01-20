@@ -23,8 +23,8 @@ export class WinAmountModal extends Block {
 	private _drawBankPanel(): void {
 		const { lastWinAmount } = this.models.result
 
-		var countValue = 0
-		var frequency = 0
+		let countValue = 0
+		let frequency = 0
 		const { win_text_panel } = GAME.config.getConfig()
 
 		const basicText = new Text({
@@ -77,7 +77,7 @@ export class WinAmountModal extends Block {
 		const maxScale = 3.2 // largest we want it
 		const frequencyChange = 0.05 // How fast the animation progresses
 
-		var countUpTicker = new Ticker()
+		let countUpTicker = new Ticker()
 
 		countUpTicker.add(() => {
 			const normalizedSine = (Math.sin(frequency) + 1) / 2 // Convert from [-1,1] to [0,1]

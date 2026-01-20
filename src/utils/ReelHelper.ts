@@ -58,8 +58,8 @@ export function emptyAllReels(): void {
 }
 
 export function getSymbolFrames(symbol: string): any {
-	var frames = []
-	var sheet
+	let frames = []
+	let sheet
 	switch (symbol) {
 		case 'W1':
 			sheet = Assets.get('chest')
@@ -158,7 +158,7 @@ export function setupReel(
 
 	reelContainer.removeChildren()
 
-	for (var y = 0; y < allReels; y++) {
+	for (let y = 0; y < allReels; y++) {
 		const reelToBuild = models.reel.reelDisplay[y][reelNumber]
 		const frames = getSymbolFrames(reelToBuild)
 		const symbolHeight = gameConfig.gameWidth / 5

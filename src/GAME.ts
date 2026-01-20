@@ -42,7 +42,7 @@ export const gameConfig: GameConfig = {
 
 	useForcedResult: false,
 	useForcedResultIndex: undefined,
-	probabilityFRChosen: 1,
+	probabilityFRChosen: 19,
 
 	// dev
 	showBlockConsole: true,
