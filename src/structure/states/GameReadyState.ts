@@ -7,12 +7,14 @@ import { GameState } from './StateDefinitions'
 import GameControlArea from '../../ui/GameControlArea'
 
 export class GameReadyState extends State {
+	private _updateGameInfoHandler = this._updateGameInfo.bind(this)
+
 	setupEvents(): void {
 		console.log('🎮------GameReadyState------🎮')
 
 		const { events } = GAME
 		events.changeBet.add(this._updateBet.bind(this))
-		events.gameInfo.add(this._updateGameInfo.bind(this))
+		events.gameInfo.add(this._updateGameInfoHandler)
 	}
 
 	modelChanges(): void {
@@ -33,7 +35,7 @@ export class GameReadyState extends State {
 
 		events.changeBet.removeAll()
 		events.spinButton.removeAll()
-		events.gameInfo.removeAll()
+		events.gameInfo.remove(this._updateGameInfoHandler)
 	}
 
 	exitState(): void {

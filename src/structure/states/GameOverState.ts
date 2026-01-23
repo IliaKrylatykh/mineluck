@@ -11,16 +11,18 @@ import { WinAmountModal } from '../blocks/game-over/WinAmountModal'
 import GameUI from '../../ui/GameUI'
 import { winMultipliers } from '../../models/ReelModel'
 import GameControlArea from '../../ui/GameControlArea'
+import { updateBonusCounter } from '../blocks/intro/DrawBonusCounter'
 
 export class GameOverState extends State {
 	private _currentBet: number = 0
 	private _insufficientFunds: boolean
 	private _landedWinLines: string[] = []
 	private _bonusCounter: number = 0
+	private _updateGameInfoHandler = this._updateGameInfo.bind(this)
 
 	setupEvents(): void {
 		console.log('💀------GameOverState------💀')
-		GAME.events.gameInfo.add(this._updateGameInfo.bind(this))
+		GAME.events.gameInfo.add(this._updateGameInfoHandler)
 	}
 
 	modelChanges(): void {
@@ -43,7 +45,7 @@ export class GameOverState extends State {
 	}
 
 	removeEvents(): void {
-		GAME.events.gameInfo.removeAll()
+		GAME.events.gameInfo.remove(this._updateGameInfoHandler)
 	}
 
 	exitState(): void {
@@ -108,7 +110,7 @@ export class GameOverState extends State {
 					}
 					if (symbol) break
 				}
-				
+
 				if (symbol === 'B1') {
 					const multiplier = winMultipliers.H1
 					const winForLine = this._currentBet * multiplier
@@ -123,7 +125,10 @@ export class GameOverState extends State {
 						`💵 Win line ${winLineKey}: Symbol ${symbol} (3 wild = high symbol), Multiplier ${multiplier}, Win ${winForLine}`,
 					)
 					totalWin += winForLine
-				} else if (symbol && winMultipliers[symbol as keyof typeof winMultipliers]) {
+				} else if (
+					symbol &&
+					winMultipliers[symbol as keyof typeof winMultipliers]
+				) {
 					const multiplier =
 						winMultipliers[symbol as keyof typeof winMultipliers]
 					const winForLine = this._currentBet * multiplier
@@ -150,6 +155,17 @@ export class GameOverState extends State {
 		this._landedWinLines = []
 		this._bonusCounter = 0
 
+		// Подсчитываем уникальные B1 на поле (упрощенное накопление)
+		const b1Positions = new Set<string>()
+		for (let row = 0; row < spinResult.length; row++) {
+			for (let col = 0; col < spinResult[row].length; col++) {
+				if (spinResult[row][col] === 'B1') {
+					b1Positions.add(`${row}-${col}`)
+				}
+			}
+		}
+		this._bonusCounter = b1Positions.size
+
 		Object.entries(result.winLines).forEach(([winLineKey, winLinePattern]) => {
 			const checkResult = this._checkWinLinePattern(spinResult, winLinePattern)
 			if (checkResult.isWin) {
@@ -160,12 +176,6 @@ export class GameOverState extends State {
 				const positions = this._getPositionsForWinLine(winLineKey)
 				result.linesToAnimate.push(...positions)
 
-				const b1Count = checkResult.b1Count
-				if (b1Count > 0) {
-					this._bonusCounter += b1Count
-					console.log(`🔥 Бонус счетчик: +${b1Count} (линия ${winLineKey}), всего: ${this._bonusCounter}`)
-				}
-
 				if (checkResult.isOnlyB1) {
 					console.log(`⭐ Bonus ${winLineKey} `)
 				}
@@ -173,7 +183,29 @@ export class GameOverState extends State {
 		})
 
 		if (this._bonusCounter > 0) {
-			console.log(`🎁 Bonus counter: ${this._bonusCounter}`)
+			console.log(`🔥 Bonus: +${this._bonusCounter} B1 symbols found`)
+		}
+
+		result.bonusCounter += this._bonusCounter
+
+		while (result.bonusCounter >= 7) {
+			const bonusPayout = 20
+			this.models.bet.bankBalance += bonusPayout
+			result.lastWinAmount = bonusPayout
+			console.log(`🎉 Bonus reached! $${bonusPayout}`)
+
+			result.bonusCounter -= 7
+			console.log(`💾 Remaining bonus: ${result.bonusCounter}`)
+		}
+
+		updateBonusCounter()
+
+		GAME.events.gameInfo.dispatch()
+
+		if (this._bonusCounter > 0) {
+			console.log(
+				`🎁 Bonus counter: +${this._bonusCounter}, total: ${result.bonusCounter}`,
+			)
 		}
 	}
 
@@ -199,7 +231,6 @@ export class GameOverState extends State {
 		const firstSymbol = symbols[0]
 		const allSame = symbols.every(symbol => symbol === firstSymbol)
 
-		// Подсчет B1 в комбинации
 		const b1Count = symbols.filter(symbol => symbol === 'B1').length
 		const isOnlyB1 = allSame && firstSymbol === 'B1'
 

@@ -1,4 +1,16 @@
 export class ResultModel {
+	static symbolWeights: { [key: string]: number } = {
+		B1: 1,
+		W1: 10,
+		L1: 10,
+		L2: 10,
+		L3: 10,
+		L4: 10,
+		H1: 10,
+		H2: 10,
+		H3: 10,
+	}
+
 	isWin: boolean = false
 
 	spinResult: string[][] = [
@@ -86,4 +98,7 @@ export class ResultModel {
 
 	// Store the last win amount
 	lastWinAmount: number = 0
+
+	// Bonus counter
+	bonusCounter: number = 0
 }

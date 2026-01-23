@@ -34,7 +34,7 @@ export const gameConfig: GameConfig = {
 	gameWidth: 360,
 	gameHeight: 500,
 
-	reelSpinSpeed: 191,
+	reelSpinSpeed: 15,
 
 	defaultBet: 5,
 	betChangeAmount: 5,
@@ -81,6 +81,7 @@ type GAME_Type = {
 		reelDContainer: XContainer | undefined
 		reelEContainer: XContainer | undefined
 		winPanelContainer: XContainer | undefined
+		bonusCounterContainer: XContainer | undefined
 	}
 	sound: typeof sound | undefined
 	app: Application
@@ -120,6 +121,7 @@ export const GAME: GAME_Type = {
 		reelDContainer: undefined,
 		reelEContainer: undefined,
 		winPanelContainer: undefined,
+		bonusCounterContainer: undefined,
 	},
 	sound: undefined,
 	app: new Application(),

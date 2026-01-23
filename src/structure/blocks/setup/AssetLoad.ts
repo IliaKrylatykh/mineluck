@@ -34,7 +34,9 @@ export class AssetLoad extends Block {
 			game_logo: '/assets/images/game_logo.png',
 			game_frame: '/assets/images/game_frame.png',
 
-			chest: '/assets/spritesheets/wild-symbols/chest.json', // wold
+			fire_small: '/assets/spritesheets/fire_small/fire_small.json', // wild
+
+			chest: '/assets/spritesheets/wild-symbols/chest.json', // wild
 
 			fire: '/assets/spritesheets/bonus-symbols/fire.json', // bonus
 

@@ -9,7 +9,6 @@ export class DrawReelBackboard extends Block {
 
 	start(): void {
 		this._appendReelBackboard()
-
 		this.end()
 	}
 

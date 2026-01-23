@@ -99,10 +99,10 @@ export class PIXI_CONFIG {
 				parent: GAME.containers.mainGameContainer,
 				textureKey: 'game_frame',
 				anchor: 0.5,
-				w: () => 400 * 1.2,
-				h: () => 396 * 1.2,
+				w: () => 680 * 1.2,
+				h: () => 440 * 1.2,
 				x: () => window.innerWidth / 2,
-				y: () => window.innerHeight / 2,
+				y: () => window.innerHeight / 2 + 40,
 			},
 			reel_backboard: {
 				label: 'reel-backboard',
@@ -129,6 +129,49 @@ export class PIXI_CONFIG {
 				x: () => window.innerWidth / 2 - gameConfig.gameWidth / 2,
 				y: () =>
 					window.innerHeight / 2 - ((gameConfig.gameWidth / 5) * 3) / 2 + 40,
+			},
+			bonus_counter_container: {
+				label: 'bonus-counter-container',
+				x: () => window.innerWidth / 2 - gameConfig.gameWidth / 2 / 2,
+				y: () =>
+					window.innerHeight / 2 +
+					((gameConfig.gameWidth / 5) * 3) / 2 +
+					40 +
+					30,
+			},
+			bonus_counter_text: {
+				style: {
+					fontFamily: 'NicoPaint',
+					fontSize: 24,
+					fill: 0xffffff,
+					align: 'center' as const,
+				},
+				anchor: 0.5,
+			},
+			bonus_1_container: {
+				label: 'bonus-1-container',
+				x: () => 0,
+				y: () => 0,
+			},
+			bonus_2_container: {
+				label: 'bonus-1-container',
+				x: () => gameConfig.gameWidth / 6,
+				y: () => 0,
+			},
+			bonus_3_container: {
+				label: 'bonus-1-container',
+				x: () => gameConfig.gameWidth / 6,
+				y: () => 0,
+			},
+			bonus_4_container: {
+				label: 'bonus-1-container',
+				x: () => gameConfig.gameWidth / 6,
+				y: () => 0,
+			},
+			bonus_5_container: {
+				label: 'bonus-1-container',
+				x: () => gameConfig.gameWidth / 6,
+				y: () => 0,
 			},
 			master_reel_container_mask: {
 				label: 'master-reel-container-mask',

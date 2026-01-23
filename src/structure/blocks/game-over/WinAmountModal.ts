@@ -73,9 +73,9 @@ export class WinAmountModal extends Block {
 		basicText.position.x = bankPanel.graphics.width / 2
 		basicText.anchor.set(0.5)
 
-		const minScale = 2.5 // smallest we want the scale
-		const maxScale = 3.2 // largest we want it
-		const frequencyChange = 0.05 // How fast the animation progresses
+		const minScale = 2.5 
+		const maxScale = 3.2 
+		const frequencyChange = 0.05 
 
 		let countUpTicker = new Ticker()
 

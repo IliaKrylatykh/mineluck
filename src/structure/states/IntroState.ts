@@ -1,5 +1,6 @@
 import { GAME } from '../../GAME'
 import GameUI from '../../ui/GameUI'
+import { DrawBonusCounter, updateBonusCounter } from '../blocks/intro/DrawBonusCounter'
 import { DrawGameFrame } from '../blocks/intro/DrawGameFrame'
 import { DrawGameLogo } from '../blocks/intro/DrawGameLogo'
 import { DrawMainGameContainer } from '../blocks/intro/DrawMainGameContainer'
@@ -12,6 +13,7 @@ import { GameState } from './StateDefinitions'
 export class IntroState extends State {
 	setupEvents(): void {
 		console.log('🌟------IntroState------🌟')
+		GAME.events.gameInfo.add(updateBonusCounter)
 	}
 
 	modelChanges(): void {
@@ -25,6 +27,7 @@ export class IntroState extends State {
 			new DrawGameLogo('Draw game logo'),
 			new DrawGameFrame('Draw game frame'),
 			new DrawReelBackboard('Draw reel backboard'),
+			new DrawBonusCounter('Draw bonus counter'),
 			new DrawReelContainers('Draw reel containers'),
 		]
 	}

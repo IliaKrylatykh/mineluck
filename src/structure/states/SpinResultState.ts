@@ -1,5 +1,6 @@
 import { GAME, gameConfig } from '../../GAME'
 import { SYMBOLS } from '../../models/ReelModel'
+import { ResultModel } from '../../models/ResultModel'
 import GameControlArea from '../../ui/GameControlArea'
 import { getRandomForcedResult } from '../../utils/ReelHelper'
 import { SetSymbolsToReel } from '../blocks/game-ready/SetSymbolsToReel'
@@ -56,11 +57,29 @@ export class SpinResultState extends State {
 		return Math.floor(Math.random() * probability) + 1 === 1
 	}
 
-	private _generateRandomDisplayRow(): string[] {
+	private _getWeightedRandomSymbol(): string {
 		const symbols = Object.values(SYMBOLS)
+		const weights: number[] = symbols.map(
+			symbol => ResultModel.symbolWeights[symbol] || 10,
+		)
+		const totalWeight = weights.reduce((sum, weight) => sum + weight, 0)
+
+		let random = Math.random() * totalWeight
+
+		for (let i = 0; i < symbols.length; i++) {
+			random -= weights[i]
+			if (random <= 0) {
+				return symbols[i]
+			}
+		}
+
+		return symbols[symbols.length - 1]
+	}
+
+	private _generateRandomDisplayRow(): string[] {
 		const row = []
 		for (let x = 0; x < 5; x++) {
-			row.push(symbols[Math.floor(Math.random() * symbols.length)])
+			row.push(this._getWeightedRandomSymbol())
 		}
 		return row
 	}
