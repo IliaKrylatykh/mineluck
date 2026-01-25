@@ -14,9 +14,7 @@ export class SetupSounds extends Block {
 	}
 
 	private setupSounds(): void {
-		// Load sound library dynamically after user interaction
 		import('@pixi/sound').then(({ sound }) => {
-			// Assign the sound library to GAME.sound so it can be accessed elsewhere
 			GAME.sound = sound
 
 			//MUSIC

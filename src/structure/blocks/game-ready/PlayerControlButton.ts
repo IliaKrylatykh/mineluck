@@ -20,7 +20,6 @@ export class PlayerControlButton extends Block {
 	}
 
 	private _spinButtonEventsOn(): void {
-		// spinButton event turned off end of gameReadyState
 		GAME.events.spinButton.add(this._onSpinButtonPress.bind(this))
 	}
 

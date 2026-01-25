@@ -155,12 +155,12 @@ export class GameOverState extends State {
 		this._landedWinLines = []
 		this._bonusCounter = 0
 
-		// Подсчитываем уникальные B1 на поле (упрощенное накопление)
 		const b1Positions = new Set<string>()
 		for (let row = 0; row < spinResult.length; row++) {
 			for (let col = 0; col < spinResult[row].length; col++) {
 				if (spinResult[row][col] === 'B1') {
 					b1Positions.add(`${row}-${col}`)
+					result.linesToAnimate.push({ reelIndex: col, symbolIndex: row })
 				}
 			}
 		}

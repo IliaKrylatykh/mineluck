@@ -42,7 +42,6 @@ export default class GameControlArea extends Component<
 	}
 
 	componentDidUpdate(prevProps: GameControlAreaProps): void {
-		// Update state when showControls prop changes
 		if (prevProps.showControls !== this.props.showControls) {
 			this.setState({
 				showControls: this.props.showControls,

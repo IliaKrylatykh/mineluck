@@ -29,10 +29,7 @@ export class SetupState extends State {
 		GAME.states[GameState.INTRO].enterState()
 	}
 
-	// --------------------------- //
-
 	private _enableAudioProperty(enableSound: boolean): void {
 		this.models.progress.playWithSound = enableSound
-		// GAME.sound will be set in SetupSounds block when sound library is loaded
 	}
 }

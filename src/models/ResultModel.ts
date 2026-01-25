@@ -1,14 +1,14 @@
 export class ResultModel {
 	static symbolWeights: { [key: string]: number } = {
 		B1: 1,
-		W1: 10,
+		W1: 4,
 		L1: 10,
 		L2: 10,
 		L3: 10,
 		L4: 10,
-		H1: 10,
-		H2: 10,
-		H3: 10,
+		H1: 7,
+		H2: 7,
+		H3: 7,
 	}
 
 	isWin: boolean = false
@@ -96,9 +96,7 @@ export class ResultModel {
 		], // Top-left to bottom-center to top-right
 	}
 
-	// Store the last win amount
 	lastWinAmount: number = 0
 
-	// Bonus counter
 	bonusCounter: number = 0
 }
