@@ -89,10 +89,10 @@ export class PIXI_CONFIG {
 				parent: GAME.containers.mainGameContainer,
 				textureKey: 'game_logo',
 				anchor: 0.5,
-				w: () => 164,
-				h: () => 96,
+				w: () => 264,
+				h: () => 196,
 				x: () => window.innerWidth / 2,
-				y: () => 96 / 2 + 20,
+				y: () => 96 / 2 + 100,
 			},
 			game_frame: {
 				label: 'game-frame',
