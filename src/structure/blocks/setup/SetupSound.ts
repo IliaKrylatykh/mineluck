@@ -38,10 +38,6 @@ export class SetupSounds extends Block {
 			sound.play('music-1', {
 				loop: true,
 			})
-
-			sound.play('music-1', {
-				loop: true,
-			})
 		})
 	}
 }
