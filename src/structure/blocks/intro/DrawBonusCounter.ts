@@ -1,4 +1,4 @@
-import { Assets, AnimatedSprite } from 'pixi.js'
+import { Assets, AnimatedSprite, Graphics } from 'pixi.js'
 import { GAME, GAME_MODELS, gameConfig } from '../../../GAME'
 import { XContainer } from '../../../pixi/XContainer'
 import { Block } from '../../Block'
@@ -8,6 +8,9 @@ const ICON_W = 28
 const ICON_H = 30
 const GAP = 8
 const PITCH = ICON_W + GAP
+const ROW_W = (BONUS_SLOTS - 1) * PITCH + ICON_W
+const BACKDROP_PAD_X = 10
+const BACKDROP_PAD_Y = 5
 
 let bonusIcons: AnimatedSprite[] = []
 
@@ -69,6 +72,18 @@ export class DrawBonusCounter extends Block {
 
 		const centerX = gameConfig.gameWidth / 4
 		bonusIcons = []
+
+		const backdrop = new Graphics()
+		backdrop.label = 'bonus-counter-backdrop'
+		const bw = ROW_W + BACKDROP_PAD_X * 2
+		const bh = ICON_H + BACKDROP_PAD_Y * 2
+		const bx = centerX - bw / 2
+		const by = -bh / 2
+		backdrop
+			.roundRect(bx, by, bw, bh, 8)
+			.fill({ color: 0x1a1a22, alpha: 0.72 })
+		bonusCounterContainer.addChildAt(backdrop, 0)
+
 		for (let i = 0; i < BONUS_SLOTS; i++) {
 			const sprite = new AnimatedSprite(textures)
 			sprite.anchor.set(0.5)
