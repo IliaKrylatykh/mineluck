@@ -1,49 +1,44 @@
 # MineLuck (spin-game)
 
-Браузерный слот: **Pixi.js** (барабаны, спрайты, анимации) + **React** (UI поверх канваса). Сетка символов, линии выплат, ставка и баланс, бонус по символу огня, wild-сундук, звук и экран правил.
+A browser-based slot-style game built with **Pixi.js** for rendering and animation and **React** for the surrounding UI.
 
-## Стек
+## Stack
 
-- **React 19**, **TypeScript**
-- **Pixi.js 8**, **@pixi/sound**
-- **Webpack 5** (dev-server, сборка, копирование `src/assets` в `dist/assets`)
+- **React 19** / **React DOM**
+- **TypeScript**
+- **Pixi.js 8**
+- **@pixi/sound**
+- **Webpack 5** (bundling, dev server, asset pipeline)
+- **Sass** (component styles)
 
-## Требования
+## Prerequisites
 
-- **Node.js** (LTS) и **npm**
+- **Node.js** (LTS recommended) and **npm**
 
-## Установка и запуск
+## Setup
 
 ```bash
 npm install
+```
+
+## Development
+
+```bash
 npm start
 ```
 
-Откроется dev-server (по умолчанию порт **8000**, см. `webpack.config.js`).
+Runs the webpack dev server (default port **8000** — see `webpack.config.js`).
 
-Сборка продакшена:
+## Production build
 
 ```bash
 npm run build
 ```
 
-Артефакты — в каталоге **`dist/`** (в том числе статика из `src/assets`).
+Output is written to **`dist/`**. Static files under `src/assets` are copied to `dist/assets` during the build.
 
-## Игровая логика (кратко)
+## Project layout (overview)
 
-- Спин списывает текущую **ставку** с **баланса**; при нехватке средств показывается модальное окно.
-- Выигрыши считаются по **линиям** на сетке (горизонтали, вертикали, диагонали и др. — см. `ResultModel` / состояния игры).
-- **Wild** — сундук (`chest` в ассетах).
-- **Бонус огня** (`fire`): накопление по счётчику, при достижении порога начисляется фиксированная сумма (логика в игровых состояниях).
-- В левом верхнем углу: кнопка **правил** (иконка «инфо»), переключатель **музыки**.
-
-Подробные правила для игрока — в оверлее **Game rules** в приложении.
-
-## Структура (ориентиры)
-
-- `src/index.tsx` — точка входа React
-- `src/GAME.ts`, `src/PIXI_CONFIG.ts` — конфигурация и ядро игры
-- `src/structure/` — состояния и блоки сценария (спин, результат, game over)
-- `src/ui/` — React-компоненты (панель ставок, модалки, правила)
-- `src/assets/` — спрайты, звуки и т.п. (копируются в `dist/assets`)
-
+- `src/` — application source (game logic, Pixi setup, React UI)
+- `src/assets/` — images, audio, and other static assets
+- `webpack.config.js` — build and dev-server configuration
