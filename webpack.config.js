@@ -2,10 +2,13 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
+const isProd = process.env.NODE_ENV === 'production'
+const repoName = 'mineluck'
+
 module.exports = {
-	mode: 'development',
+	mode: isProd ? 'production' : 'development',
 	entry: './src/index.tsx',
-	devtool: 'inline-source-map',
+	devtool: isProd ? false : 'inline-source-map',
 	module: {
 		rules: [
 			{
@@ -48,9 +51,10 @@ module.exports = {
 		},
 	},
 	output: {
-		filename: 'bundle.js',
+		filename: 'bundle.[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
-		publicPath: '/',
+		clean: true,
+		publicPath: isProd ? `/${repoName}/` : '/',
 		assetModuleFilename: 'assets/[hash][ext][query]',
 	},
 	plugins: [
@@ -58,9 +62,7 @@ module.exports = {
 			template: './src/index.html',
 		}),
 		new CopyPlugin({
-			patterns: [
-				{ from: 'src/assets', to: 'assets' }, // copies /assets -> /dist/assets just run npm run build
-			],
+			patterns: [{ from: 'src/assets', to: 'assets' }],
 		}),
 	],
 	devServer: {
@@ -69,5 +71,6 @@ module.exports = {
 		port: 8000,
 		hot: true,
 		open: true,
+		historyApiFallback: true,
 	},
 }
