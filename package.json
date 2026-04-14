@@ -2,7 +2,7 @@
 	"name": "spin-game",
 	"version": "1.0.0",
 	"main": "index.js",
-	"author": "",
+	"author": "Ilia Krylatykh",
 	"license": "ISC",
 	"description": "",
 	"scripts": {
