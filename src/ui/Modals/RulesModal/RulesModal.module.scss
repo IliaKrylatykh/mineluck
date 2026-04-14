@@ -1,0 +1,169 @@
+.overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	margin: 0;
+	padding: clamp(1rem, 4vw, 2.5rem);
+	border: none;
+	background: linear-gradient(
+		165deg,
+		rgba(14, 16, 22, 0.97) 0%,
+		rgba(8, 10, 14, 0.98) 45%,
+		rgba(18, 14, 20, 0.97) 100%
+	);
+	cursor: pointer;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	box-sizing: border-box;
+}
+
+.inner {
+	cursor: default;
+	max-width: 36rem;
+	margin: 0 auto;
+	min-height: min-content;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.header {
+	text-align: center;
+	padding-bottom: 0.25rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.title {
+	margin: 0 0 0.65rem;
+	font-size: clamp(1.35rem, 4vw, 1.85rem);
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: #f2f4f8;
+	line-height: 1.2;
+}
+
+.lead {
+	margin: 0;
+	font-size: 0.98rem;
+	line-height: 1.55;
+	color: rgba(220, 226, 235, 0.82);
+	max-width: 32rem;
+	margin-inline: auto;
+}
+
+.body {
+	display: flex;
+	flex-direction: column;
+	gap: 1.35rem;
+}
+
+.section {
+	margin: 0;
+}
+
+.sectionTitle {
+	margin: 0 0 0.4rem;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: rgba(180, 192, 210, 0.75);
+}
+
+.text {
+	margin: 0;
+	font-size: 0.94rem;
+	line-height: 1.62;
+	color: rgba(232, 236, 242, 0.92);
+}
+
+.text strong {
+	color: #fff;
+	font-weight: 600;
+}
+
+.hueRed,
+.hueOrange,
+.hueBlue,
+.hueGold {
+	font-weight: 700;
+	letter-spacing: 0.01em;
+}
+
+.hueRed {
+	color: #ff8787;
+}
+
+.hueOrange {
+	color: #ffa94d;
+}
+
+.hueBlue {
+	color: #74c0fc;
+}
+
+.hueGold {
+	color: #fcc419;
+}
+
+.text strong.fireWord {
+	color: #ff922b;
+	font-weight: 700;
+	text-shadow: 0 0 12px rgba(255, 146, 43, 0.35);
+}
+
+.kbd {
+	display: inline-block;
+	padding: 0.08em 0.45em;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	font-size: 0.9em;
+	font-weight: 600;
+	color: #fff;
+}
+
+.footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.65rem;
+	padding-top: 0.5rem;
+	margin-top: 0.25rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.closeButton {
+	appearance: none;
+	margin: 0;
+	padding: 0.65rem 1.75rem;
+	border: 1px solid rgba(255, 255, 255, 0.28);
+	border-radius: 6px;
+	background: rgba(255, 255, 255, 0.06);
+	color: #f2f4f8;
+	font-size: 0.9rem;
+	font-weight: 600;
+	font-family: inherit;
+	cursor: pointer;
+	transition:
+		background 0.15s ease,
+		border-color 0.15s ease,
+		transform 0.12s ease;
+
+	&:hover {
+		background: rgba(255, 255, 255, 0.12);
+		border-color: rgba(255, 255, 255, 0.4);
+	}
+
+	&:active {
+		transform: scale(0.98);
+	}
+}
+
+.hint {
+	margin: 0;
+	font-size: 0.78rem;
+	line-height: 1.4;
+	color: rgba(180, 190, 205, 0.55);
+	text-align: center;
+}

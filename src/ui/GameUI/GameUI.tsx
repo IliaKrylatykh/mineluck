@@ -4,6 +4,7 @@ import { DeepReadonly } from '../../types'
 import { ensureGameSounds } from '../../audio/gameSounds'
 import { GAME, GAME_MODELS } from '../../GAME'
 import AudioModal from '../Modals/AudioModal'
+import RulesModal from '../Modals/RulesModal'
 import styles from './GameUI.module.scss'
 import GameControlArea from '../GameControlArea'
 import InsufficientFundsModal from '../Modals/InsofficientFundsModal'
@@ -20,6 +21,7 @@ interface GameUIState {
 	menuAudioVisible: boolean
 	audioPopupVisible: boolean
 	musicEnabled: boolean
+	rulesModalVisible: boolean
 }
 
 export default class GameUI extends Component<GameUIProps, GameUIState> {
@@ -36,6 +38,7 @@ export default class GameUI extends Component<GameUIProps, GameUIState> {
 			menuAudioVisible: false,
 			audioPopupVisible: false,
 			musicEnabled: props.models.progress.playWithSound,
+			rulesModalVisible: false,
 		}
 		GameUI.instance = this
 	}
@@ -137,17 +140,33 @@ export default class GameUI extends Component<GameUIProps, GameUIState> {
 			<>
 				<div className={styles.gameUi}>
 					{this.state.gameControlAreaVisible && (
-						<button
-							type='button'
-							className={styles.musicToggle}
-							onClick={this.handleMusicToggle}
-							title={this.state.musicEnabled ? 'Mute music' : 'Unmute music'}
-							aria-label={
-								this.state.musicEnabled ? 'Mute music' : 'Unmute music'
-							}
-						>
-							{this.state.musicEnabled ? '\u{1F50A}' : '\u{1F507}'}
-						</button>
+						<div className={styles.topLeftControls}>
+							<button
+								type='button'
+								className={styles.rulesButton}
+								onClick={() => this.setState({ rulesModalVisible: true })}
+								title='Game rules'
+								aria-label='Open game rules'
+							>
+								{'\u2139\uFE0F'}
+							</button>
+							<button
+								type='button'
+								className={styles.musicToggle}
+								onClick={this.handleMusicToggle}
+								title={this.state.musicEnabled ? 'Mute music' : 'Unmute music'}
+								aria-label={
+									this.state.musicEnabled ? 'Mute music' : 'Unmute music'
+								}
+							>
+								{this.state.musicEnabled ? '\u{1F50A}' : '\u{1F507}'}
+							</button>
+						</div>
+					)}
+					{this.state.rulesModalVisible && (
+						<RulesModal
+							onClose={() => this.setState({ rulesModalVisible: false })}
+						/>
 					)}
 					{this.state.audioPopupVisible && (
 						<AudioModal onClose={() => this.showAudioPopup(false)} />
