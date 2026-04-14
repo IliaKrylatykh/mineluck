@@ -7,7 +7,7 @@
 	"description": "",
 	"scripts": {
 		"start": "webpack serve --mode development",
-		"build": "NODE_ENV=production webpack --mode production"
+		"build": "webpack --mode production"
 	},
 	"devDependencies": {
 		"@types/react": "^19.2.7",

@@ -1,11 +1,15 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
-const isProd = process.env.NODE_ENV === 'production'
 const repoName = 'mineluck'
 
-module.exports = {
+module.exports = (env, argv) => {
+	const isProd = argv.mode === 'production'
+	const publicPath = isProd ? `/${repoName}/` : '/'
+
+	return {
 	mode: isProd ? 'production' : 'development',
 	entry: './src/index.tsx',
 	devtool: isProd ? false : 'inline-source-map',
@@ -54,12 +58,18 @@ module.exports = {
 		filename: 'bundle.[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
 		clean: true,
-		publicPath: isProd ? `/${repoName}/` : '/',
+		publicPath,
 		assetModuleFilename: 'assets/[hash][ext][query]',
 	},
 	plugins: [
+		new webpack.DefinePlugin({
+			__PUBLIC_PATH__: JSON.stringify(publicPath),
+		}),
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
+			templateParameters: {
+				faviconHref: `${publicPath}assets/favicon.svg`,
+			},
 		}),
 		new CopyPlugin({
 			patterns: [{ from: 'src/assets', to: 'assets' }],
@@ -73,4 +83,5 @@ module.exports = {
 		open: true,
 		historyApiFallback: true,
 	},
+	}
 }

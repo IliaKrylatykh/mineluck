@@ -3,14 +3,17 @@ import { Block } from '../../Block'
 import { TGraphics } from '../../../pixi/TGraphics'
 import { GAME } from '../../../GAME'
 import { XContainer } from '../../../pixi/XContainer'
+import { assetUrl } from '../../../utils/assetUrl'
 
 export class AssetLoad extends Block {
 	private progressBar: TGraphics
 	private randomQuotes: string[] = [
-		'A wise hero prepares for battle long\nbefore the first sword is drawn...',
-		'Gold wins wars,\nbut courage decides their outcome...',
-		'Castles fall.\nHeroes endure...',
-		'Victory favors those\nwho dare to explore...',
+		'The best seams hide\nwhere the lamp barely reaches...',
+		'One more metre down—\none swing closer to the strike...',
+		'Ore does not care for luck;\nit only yields to stubborn steel...',
+		'Listen to the tunnel—\nechoes tell you where the rock is honest...',
+		'Dust in the air,\nglint on the cart: that is the miner’s tax...',
+		'The mother lode keeps its secrets—\nuntil someone digs for them...',
 	]
 
 	constructor(name: string) {
@@ -29,25 +32,25 @@ export class AssetLoad extends Block {
 
 	private async _loadAssets(): Promise<void> {
 		Assets.addBundle('all', {
-			intro_BG: '/assets/images/intro_BG.png',
-			game_BG: '/assets/images/game_BG.png',
-			game_logo: '/assets/images/game_logo.png',
-			game_frame: '/assets/images/game_frame.png',
+			intro_BG: assetUrl('assets/images/intro_BG.png'),
+			game_BG: assetUrl('assets/images/game_BG.png'),
+			game_logo: assetUrl('assets/images/game_logo.png'),
+			game_frame: assetUrl('assets/images/game_frame.png'),
 
-			fire_small: '/assets/spritesheets/fire_small/fire_small.json', // wild
+			fire_small: assetUrl('assets/spritesheets/fire_small/fire_small.json'), // wild
 
-			chest: '/assets/spritesheets/wild-symbols/chest.json', // wild
+			chest: assetUrl('assets/spritesheets/wild-symbols/chest.json'), // wild
 
-			fire: '/assets/spritesheets/bonus-symbols/fire.json', // bonus
+			fire: assetUrl('assets/spritesheets/bonus-symbols/fire.json'), // bonus
 
-			crys: '/assets/spritesheets/high-symbols/crys.json', // high
-			gem: '/assets/spritesheets/high-symbols/gem.json', // high
-			gold: '/assets/spritesheets/high-symbols/gold.json', // high
+			crys: assetUrl('assets/spritesheets/high-symbols/crys.json'), // high
+			gem: assetUrl('assets/spritesheets/high-symbols/gem.json'), // high
+			gold: assetUrl('assets/spritesheets/high-symbols/gold.json'), // high
 
-			sulf: '/assets/spritesheets/low-symbols/sulf.json', // low
-			ore: '/assets/spritesheets/low-symbols/ore.json', // low
-			wood: '/assets/spritesheets/low-symbols/wood.json', // low
-			merc: '/assets/spritesheets/low-symbols/merc.json', // low
+			sulf: assetUrl('assets/spritesheets/low-symbols/sulf.json'), // low
+			ore: assetUrl('assets/spritesheets/low-symbols/ore.json'), // low
+			wood: assetUrl('assets/spritesheets/low-symbols/wood.json'), // low
+			merc: assetUrl('assets/spritesheets/low-symbols/merc.json'), // low
 		})
 
 		const assets = await Assets.loadBundle('all', (progress: number) => {
